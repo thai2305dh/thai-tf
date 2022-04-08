@@ -1,0 +1,6 @@
+key
+.terraform.lock.hcl
+terraform.exe
+.terraform
+provider.tf
+app
