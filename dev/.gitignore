@@ -1,0 +1,5 @@
+vpc.tf
+provider.tf
+.terraform.lock.hcl
+terraform.exe
+.terraform
