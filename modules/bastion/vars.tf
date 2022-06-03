@@ -1,7 +1,7 @@
 variable "ami" {
     type = string
 }
-variable "type" {
+variable "type_bastion" {
       type = string
 }
 variable "ingress-bastion" {
@@ -18,4 +18,7 @@ variable "vpc-id" {
 # }
 variable "bastion-subnet" {
     type = string
+}
+variable "check_public_ip_bastion" {
+    type = bool
 }

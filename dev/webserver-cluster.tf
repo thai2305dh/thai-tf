@@ -18,12 +18,12 @@ variable "ami-webserver" {
     type = string
     default = "ami-0fb653ca2d3203ac1"
 }
-variable "port-alb-access" {}
-variable "protocol-alb-access" {}
+variable "port-alb-access-port" {}
+variable "protocol-alb-access-protocol" {}
 
-variable "path-alb-healthcheck" {}
-variable "port-alb-health" {}
-variable "protocol-alb-health" {}
+variable "path-alb-healthcheck-path" {}
+variable "port-alb-health-port" {}
+variable "protocol-alb-health-protocol" {}
 variable "action-alb-request" {}
 module "webserver-cluster" {
     source = "../modules/webserver-cluster"
@@ -44,11 +44,11 @@ module "webserver-cluster" {
 
     min = var.min
     max = var.max
-    alb-request-access-port = var.port-alb-access
-    alb-request-access-protocol = var.protocol-alb-access
-    alb-request-health-path = var.path-alb-healthcheck
-    alb-request-health-port = var.port-alb-health
-    alb-request-health-protocol = var.protocol-alb-health
+    alb-request-access-port = var.port-alb-access-port
+    alb-request-access-protocol = var.protocol-alb-access-protocol
+    alb-request-health-path = var.path-alb-healthcheck-path
+    alb-request-health-port = var.port-alb-health-port
+    alb-request-health-protocol = var.protocol-alb-health-protocol
 
     alb-internal = false
 
@@ -82,7 +82,6 @@ resource "aws_security_group_rule" "allow-nat" {
     security_group_id = module.webserver-cluster.sg_asg_id
 
     type = "egress"
-
     from_port = 0
     to_port = 65535
     protocol = "-1"

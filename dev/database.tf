@@ -2,13 +2,10 @@ variable "db-public" {
   type = bool
   default = false
 }
-# variable "vpc-id" {
-#   type = string
-# }
-# variable "db-engine" {
-#   type = string
-#   default = mysql
-# }
+variable "db-engine" {
+  type = string
+  default = "mysql"
+}
 variable "db-engine-version" {
   type = string
   default = 8.0
@@ -33,10 +30,6 @@ variable "port" {
   type = string
   default = 3306
 }
-variable "az" {
-  type = string
-  default = "us-east-2a"
-}
 
 module "database" {
     source = "../modules/database"
@@ -44,7 +37,7 @@ module "database" {
     vpc-id = "${module.vpc.vpc_id}"
     db-public-access = var.db-public
 
-    engine = "mysql"
+    engine = var.db-engine
     engine-version = var.db-engine-version
     type = var.db-instance-type
 

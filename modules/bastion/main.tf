@@ -1,8 +1,8 @@
 resource "aws_instance" "bastion" {
     ami = var.ami //Phiên bản HĐH
-    instance_type = var.type
+    instance_type = var.type_bastion
     subnet_id = var.bastion-subnet
-    associate_public_ip_address = true
+    associate_public_ip_address = var.check_public_ip_bastion
     # vpc_id = var.vpc-id
     vpc_security_group_ids = [aws_security_group.sg-bastion.id]
     key_name = "key"

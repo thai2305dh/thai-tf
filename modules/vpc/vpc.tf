@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "vpc-thai-new"
+    Name = "vpc-thai-project"
   }
 }
 # tạo public và private subnet - Vùng chứa đối tượng cần truy cập( Ở đây là dải IP )

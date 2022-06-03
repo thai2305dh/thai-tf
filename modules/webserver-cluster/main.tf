@@ -26,10 +26,12 @@ resource "aws_security_group_rule" "sg-rule-alb" {
   protocol = each.value[3]
   cidr_blocks = each.value[4]
 }
+
 resource "aws_security_group" "sg-asc" {
     name = "sg-asc"
     vpc_id = var.vpc-id
 }
+
 resource "aws_security_group_rule" "sg-rule-asc" {
     security_group_id = aws_security_group.sg-asc.id
     for_each = local.sg_asc_rules
@@ -40,10 +42,12 @@ resource "aws_security_group_rule" "sg-rule-asc" {
     protocol = each.value[3]
     source_security_group_id = each.value[4]
 }
+
 resource "aws_security_group" "sg-nat-id" {
     name = "sg-nat-id"
     vpc_id = var.vpc-id
 }
+
 resource "aws_security_group_rule" "sg-nat-id" {
     security_group_id = aws_security_group.sg-nat-id.id
 
