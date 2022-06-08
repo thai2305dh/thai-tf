@@ -1,43 +1,10 @@
-
-variable "type-webserver" {
-    type = string
-    default = "t2.micro"
-}
-variable "min" {
-    type = number
-    default = 2
-}
-variable "max" {
-    type = number
-    default = 4
-}
-variable "ami-webserver" {
-    type = string
-    default = "ami-0fb653ca2d3203ac1"
-}
-variable "port-alb-access" {}
-variable "protocol-alb-access" {}
-
-variable "path-alb-healthcheck" {}
-variable "port-alb-health" {}
-variable "protocol-alb-health" {}
-variable "action-alb-request" {}
 module "webserver-cluster" {
     source = "../modules/webserver-cluster"
-    # env = var.env
     vpc-id = "${module.vpc.vpc_id}"
     # private-subnet = module.vpc.private_subnet
-
     ami-instance = var.ami-webserver
     type-instance = var.type-webserver
     key-name = "key"
-    
-    # user-data = "${data.template_file.webserver.rendered}"
-    # user-data = <<-EOF
-    # #!/bin/bash
-    #               sudo rm -rf /var/lib/apt/lists/lock
-    #               sudo apt update
-    # EOF
     associate-public-ip = false
     # vpc-id = var.vpc_id
     min = var.min

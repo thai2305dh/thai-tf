@@ -1,6 +1,6 @@
-//gọi file cấu hình
+//Gọi file cấu hình
 data "template_file" "webserver" {
-  template = file("${path.module}/config-file/webserver.sh")
+    template = file("${path.module}/config-file/webserver.sh")
 }
 
 module "ami" {

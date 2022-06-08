@@ -28,7 +28,7 @@ variable "password" {
   type = string
 }
 variable "port" {
-  type = string
+  type = number
 }
 
 variable "az" {
