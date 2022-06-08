@@ -1,6 +1,6 @@
-output "sg_asg_id" {
-    value = aws_security_group.sg-asc.id
+output "sgroup_asg_id" {
+    value = aws_security_group.sgroup-asc.id
 }
-output "sg-nat-id" {
-  value = aws_security_group.sg-asc.id
+output "sgroup-nat-id" {
+  value = aws_security_group.sgroup-asc.id
 }

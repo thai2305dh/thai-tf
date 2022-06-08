@@ -8,7 +8,7 @@ variable "db-engine" {
 }
 variable "db-engine-version" {
   type = string
-  default = 8.0
+  default = "8.0"
 }
 variable "db-instance-type" {
   type = string
@@ -58,5 +58,5 @@ resource "aws_security_group_rule" "sg-ingress" {
   from_port = 3306
   to_port = 3306
   protocol = "tcp"
-  source_security_group_id = "${module.webserver-cluster.sg_asg_id}"
+  source_security_group_id = "${module.webserver-cluster.sgroup_asg_id}"
 }

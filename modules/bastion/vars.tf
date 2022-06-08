@@ -22,3 +22,6 @@ variable "bastion-subnet" {
 variable "check_public_ip_bastion" {
     type = bool
 }
+variable "key_name" {
+    type = string
+}

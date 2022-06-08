@@ -10,9 +10,6 @@ variable "type-instance" {
 variable "key-name" {
     type = string
 }
-# variable "user-data" {
-#     type = string
-# }
 variable "associate-public-ip" {
     type = bool
 }

@@ -5,18 +5,18 @@ locals {
     "rule_out" = ["egress", 0, 0, "-1", ["0.0.0.0/0"]] // Cho phép mọi mọi request ra ngoài Internet
   }
   sg_asc_rules = {
-    "rule_http_alb" = ["ingress", 80, 80, "tcp", "${aws_security_group.sg-alb.id}"] // Cho phép check healthy HTTP từ alb
-    "rule_https_alb" = ["ingress", 443, 443, "tcp", "${aws_security_group.sg-alb.id}"] // Cho phép check healthy HTTPS từ alb
+    "rule_http_alb" = ["ingress", 80, 80, "tcp", "${aws_security_group.sgroup-alb.id}"] // Cho phép check healthy HTTP từ alb
+    "rule_https_alb" = ["ingress", 443, 443, "tcp", "${aws_security_group.sgroup-alb.id}"] // Cho phép check healthy HTTPS từ alb
     # "rule_ssh_nat" = ["ingress", 22, 22, "ssh", "${aws_security_group.sg-ssh.id}"] // Cho phép truy cập ssh từ bastion
   }
 }
-resource "aws_security_group" "sg-alb" {
-  name = "sg-alb"
+resource "aws_security_group" "sgroup-alb" {
+  name = "sgroup-alb"
   vpc_id = var.vpc-id
 }
 
 resource "aws_security_group_rule" "sg-rule-alb" {
-  security_group_id = aws_security_group.sg-alb.id
+  security_group_id = aws_security_group.sgroup-alb.id
   
   for_each = local.sg_alb_rules
 
@@ -27,13 +27,13 @@ resource "aws_security_group_rule" "sg-rule-alb" {
   cidr_blocks = each.value[4]
 }
 
-resource "aws_security_group" "sg-asc" {
-    name = "sg-asc"
+resource "aws_security_group" "sgroup-asc" {
+    name = "sgroup-asc"
     vpc_id = var.vpc-id
 }
 
 resource "aws_security_group_rule" "sg-rule-asc" {
-    security_group_id = aws_security_group.sg-asc.id
+    security_group_id = aws_security_group.sgroup-asc.id
     for_each = local.sg_asc_rules
 
     type = each.value[0]
@@ -43,13 +43,13 @@ resource "aws_security_group_rule" "sg-rule-asc" {
     source_security_group_id = each.value[4]
 }
 
-resource "aws_security_group" "sg-nat-id" {
-    name = "sg-nat-id"
+resource "aws_security_group" "sgroup-nat-id" {
+    name = "sgroup-nat-id"
     vpc_id = var.vpc-id
 }
 
-resource "aws_security_group_rule" "sg-nat-id" {
-    security_group_id = aws_security_group.sg-nat-id.id
+resource "aws_security_group_rule" "sgroup-nat-id" {
+    security_group_id = aws_security_group.sgroup-nat-id.id
 
     type = "ingress"
     to_port = 0
@@ -59,13 +59,13 @@ resource "aws_security_group_rule" "sg-nat-id" {
 }
 # Cho phép giao tiếp giữa các hosts trong vpc
 resource "aws_security_group_rule" "sg-rule-asg-ingress" {
-  security_group_id = aws_security_group.sg-asc.id
+  security_group_id = aws_security_group.sgroup-asc.id
   type = "ingress"
 
   from_port = 0
   to_port = 65535
   protocol = "tcp"
-  source_security_group_id = aws_security_group.sg-asc.id
+  source_security_group_id = aws_security_group.sgroup-asc.id
 }
 
 resource "aws_launch_configuration" "webserver-cluster" {
@@ -75,7 +75,7 @@ resource "aws_launch_configuration" "webserver-cluster" {
   instance_type = var.type-instance
   key_name = var.key-name
   # user_data = var.user-data
-  security_groups = [ "${aws_security_group.sg-asc.id}" ]
+  security_groups = [ "${aws_security_group.sgroup-asc.id}" ]
 
   associate_public_ip_address = var.associate-public-ip
 
@@ -143,7 +143,7 @@ resource "aws_alb" "alb" {
   name = "terraform-alb"
 
   internal = var.alb-internal
-  security_groups = [ "${aws_security_group.sg-alb.id}" ]
+  security_groups = [ "${aws_security_group.sgroup-alb.id}" ]
   subnets = [ "${var.public-subnets}" ]
 
   ip_address_type = "ipv4"

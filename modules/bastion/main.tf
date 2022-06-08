@@ -4,8 +4,8 @@ resource "aws_instance" "bastion" {
     subnet_id = var.bastion-subnet
     associate_public_ip_address = var.check_public_ip_bastion
     # vpc_id = var.vpc-id
-    vpc_security_group_ids = [aws_security_group.sg-bastion.id]
-    key_name = "key"
+    vpc_security_group_ids = [aws_security_group.sgroup-bastion.id]
+    key_name = var.key_name
 
     user_data = <<-EOF
     #!/bin/bash
@@ -16,12 +16,12 @@ resource "aws_instance" "bastion" {
     Name = "Bastion"
   }
 }
-resource "aws_security_group" "sg-bastion" {
-    name = "sg-bastion"
+resource "aws_security_group" "sgroup-bastion" {
+    name = "sgroup-bastion"
     vpc_id = var.vpc-id
 }
-resource "aws_security_group_rule" "sg-bastion" {
-  security_group_id = aws_security_group.sg-bastion.id
+resource "aws_security_group_rule" "sgroup-bastion" {
+  security_group_id = aws_security_group.sgroup-bastion.id
   
   type = "ingress"
   to_port = var.ingress-bastion

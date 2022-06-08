@@ -18,3 +18,9 @@ variable "private-all" {
         "us-east-2b" = 4
     }    
 }
+# bastion
+variable "key_name" {}
+variable "bastion-ami" {}
+variable "ingress-bastion" {}
+variable "egress-bastion" {}
+variable "type_bastion" {}
