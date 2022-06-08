@@ -13,9 +13,6 @@ variable "egress-bastion" {
 variable "vpc-id" {
     type = string
 }
-# variable "cidr_blocks" {
-#   type = string
-# }
 variable "bastion-subnet" {
     type = string
 }

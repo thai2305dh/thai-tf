@@ -1,6 +1,6 @@
 resource "aws_ami_from_instance" "ami-server" {
-  name               = "ami-server"
-  source_instance_id = "${aws_instance.webserver.id}"
+    name               = "ami-server"
+    source_instance_id = "${aws_instance.webserver.id}"
 }
 resource "aws_instance" "webserver" {
 
@@ -10,8 +10,8 @@ resource "aws_instance" "webserver" {
     associate_public_ip_address = true
     # vpc_security_group_ids = [aws_security_group.tf-sg.id]
     key_name = var.key_name
-
     user_data = var.user-data
+    
     tags = {
     Name = "AMI-server"
   }

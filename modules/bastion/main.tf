@@ -9,23 +9,23 @@ resource "aws_instance" "bastion" {
 
     user_data = <<-EOF
     #!/bin/bash
-                  sudo rm -rf /var/lib/apt/lists/lock
-                  sudo apt update
-  EOF
-    tags = {
-    Name = "Bastion"
-  }
+          sudo rm -rf /var/lib/apt/lists/lock
+          sudo apt update
+    EOF
+      tags = {
+      Name = "Bastion"
+    }
 }
 resource "aws_security_group" "sgroup-bastion" {
     name = "sgroup-bastion"
     vpc_id = var.vpc-id
 }
 resource "aws_security_group_rule" "sgroup-bastion" {
-  security_group_id = aws_security_group.sgroup-bastion.id
-  
-  type = "ingress"
-  to_port = var.ingress-bastion
-  from_port = var.egress-bastion
-  protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+    security_group_id = aws_security_group.sgroup-bastion.id
+    
+    type = "ingress"
+    to_port = var.ingress-bastion
+    from_port = var.egress-bastion
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
 }
