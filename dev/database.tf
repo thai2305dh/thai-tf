@@ -26,5 +26,5 @@ resource "aws_security_group_rule" "sg-ingress" {
     from_port = 3306
     to_port = 3306
     protocol = "tcp"
-    source_security_group_id = "${module.webserver-cluster.sgroup_asg_id}"
+    source_security_group_id = "${module.webserver-cluster.sg-asg-id}"
 }

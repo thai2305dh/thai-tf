@@ -26,6 +26,6 @@ resource "aws_security_group_rule" "sgroup-bastion" {
     type = "ingress"
     to_port = var.ingress-bastion
     from_port = var.egress-bastion
-    protocol = "tcp"
+    protocol = "-1"
     cidr_blocks = ["0.0.0.0/0"]
 }

@@ -20,7 +20,7 @@ variable "egress-bastion" {}
 variable "type_bastion" {}
 
 #Codedeploy
-variable "deployment-config-name" {}
+# variable "deployment-config-name" {}
 
 #Webserver
 variable "type-webserver" {}
@@ -34,3 +34,13 @@ variable "path-alb-healthcheck" {}
 variable "port-alb-health" {}
 variable "protocol-alb-health" {}
 variable "action-alb-request" {}
+
+#ami
+variable "ingress-ami" {}
+variable "egress-ami" {}
+# variable "key_name_ami" {}
+#key_pair
+variable "key_pair_name" {
+    type = string
+    default = "my-key"
+}

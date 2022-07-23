@@ -4,7 +4,7 @@ resource "aws_alb" "alb" {
 
     internal = var.alb-internal //Check xem ALB có phải nội bộ không
     security_groups = [ "${aws_security_group.sgroup-alb.id}" ]
-    subnets = [ "${var.public-subnets}" ]
+    subnets = var.public-subnets
 
     ip_address_type = "ipv4"
     load_balancer_type = "application"
@@ -38,7 +38,7 @@ resource "aws_alb_listener" "alb-listener-https" {
     count = var.alb-listener-https ? 1 : 0
 
     load_balancer_arn = aws_alb.alb.arn
-    
+
     port = var.alb-listener-port
     protocol = var.alb-listener-protocol
     ssl_policy = ""
@@ -66,6 +66,10 @@ resource "aws_alb_target_group" "alb" {
 }
 
 resource "aws_autoscaling_attachment" "attach" {
-    alb_target_group_arn = aws_alb_target_group.alb.arn
+    lb_target_group_arn = aws_alb_target_group.alb.arn
     autoscaling_group_name = aws_autoscaling_group.webserver-cluster.id
 }
+ 
+# output "alb-dns" {
+  
+# }

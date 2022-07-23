@@ -59,5 +59,8 @@ variable "alb-action" {
     type = string
 }
 variable "public-subnets" {
+    type = list(string)
+}
+variable "asg-subnets" {
     type = string
 }

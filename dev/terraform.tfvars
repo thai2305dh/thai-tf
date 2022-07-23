@@ -2,27 +2,27 @@
 db-engine = "mysql"
 db-engine-version = "8.0"
 db-instance-type = "db.t2.micro"
-db-name = "thuvien"
-username = "thai"
-password = "Thai2305@"
+db-name = "vegefood"
+username = "vegefood"
+password = "Thai2305"
 port = 3306
 
 #VPC
 cidr = "10.0.0.0/16"
 public-all = {
-    "us-east-2a" = 1
-    "us-east-2b" = 2
+    "us-east-1a" = 1
+    "us-east-1b" = 2
 }
 private-all = {
-    "us-east-2a" = 3
-    "us-east-2b" = 4
+    "us-east-1a" = 3
+    "us-east-1b" = 4
 }  
 
 #  Bastion
-bastion-ami = "ami-0fb653ca2d3203ac1"
+bastion-ami = "ami-0c4f7023847b90238"
 type_bastion = "t2.micro"
-ingress-bastion = -1
-egress-bastion = -1
+ingress-bastion = 0
+egress-bastion = 0
 key_name = "beanstalk"
 
 #  Webserver-cluster
@@ -38,5 +38,8 @@ port-alb-health = 80
 protocol-alb-health = "HTTP"
 action-alb-request = "forward"
 
+#ami
+ingress-ami = 0
+egress-ami = 0
 # Code deploy
-deployment-config-name = "CodeDeployDefault.OneAtATime"
+# deployment-config-name = "CodeDeployDefault.OneAtATime"

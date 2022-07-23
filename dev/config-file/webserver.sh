@@ -1,19 +1,20 @@
 #File giúp cài đặt cấu hình cho máy chủ cho laravel
 
-#!/bin/bash
-sudo apt update
-sudo apt dist-upgrade
-sudo apt install nginx
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:ondrej/php
-sudo apt install php8.0
-sudo apt install php-curl php-cli php-mbstring wget git unzip php8.0-mysql php8.0-dom php8.0-xml php8.0-fpm php8.0-xmlwriter phpunit php-mbstring php-xml
+#!/bin/bash -ex
+                  sudo rm -rf /var/lib/apt/lists/lock
+                  sudo apt update
+                  sudo apt install nginx -y
+sudo apt dist-upgrade -y
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt install php8.0 -y
+sudo apt install php-curl php-cli php-mbstring wget git unzip php8.0-mysql php8.0-dom php8.0-xml php8.0-fpm php8.0-xmlwriter phpunit php-mbstring php-xml -y
 # sudo apt install libapache2-mod-php8.0
 # sudo a2enmod rewrite
 sudo systemctl restart nginx
 
 #install codedeploy agent
-sudo apt install ruby-full
+sudo apt install ruby-full -y
 wget https://aws-codedeploy-us-east-2.s3.us-east-2.amazonaws.com/latest/install
 chmod +x ./install
 sudo ./install auto > /tmp/logfile   

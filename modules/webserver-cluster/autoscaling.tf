@@ -1,6 +1,6 @@
 resource "aws_autoscaling_group" "webserver-cluster" {
     name = "terraform-webserver-cluster"
-    #vpc_zone_identifier = [ "${var.private-subnets}" ]
+    vpc_zone_identifier = [ "${var.asg-subnets}" ]
     min_size = var.min
     max_size = var.max
     launch_configuration = aws_launch_configuration.webserver-cluster.id

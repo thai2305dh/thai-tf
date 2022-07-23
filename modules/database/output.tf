@@ -4,3 +4,6 @@ output "sg_rds_id" {
 output "db_endpoint" {
     value = aws_db_instance.rds-instance.endpoint
 }
+# output "db-dns-name" {
+#     value = aws_db_instance.rds-instance.dns_name
+# }

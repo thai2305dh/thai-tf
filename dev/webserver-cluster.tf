@@ -1,10 +1,10 @@
 module "webserver-cluster" {
     source = "../modules/webserver-cluster"
     vpc-id = "${module.vpc.vpc_id}"
-    # private-subnet = module.vpc.private_subnet
-    ami-instance = var.ami-webserver
+    asg-subnets = "${module.vpc.private_subnets[0]}"
+    ami-instance = "${module.ami.ami-id}"//var.ami-webserver
     type-instance = var.type-webserver
-    key-name = "key"
+    key-name = aws_key_pair.my_key_pair.key_name
     associate-public-ip = false
     # vpc-id = var.vpc_id
     min = var.min
@@ -22,33 +22,33 @@ module "webserver-cluster" {
     alb-listener-protocol = var.protocol-alb-access
     alb-listener-port = var.port-alb-access
     alb-action = var.action-alb-request
-    public-subnets = "${module.vpc.public_subnets[0]}"
+    public-subnets = ["${module.vpc.public_subnets[0]}", "${module.vpc.public_subnets[1]}"]
 }
 
-resource "aws_security_group_rule" "allow-ssh" {
-    security_group_id = module.webserver-cluster.sgroup_asg_id
-    type = "ingress"
+# resource "aws_security_group_rule" "allow-ssh" {
+#     security_group_id = module.webserver-cluster.sg-asg-id
+#     type = "ingress"
 
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
-    source_security_group_id = "${module.webserver-cluster.sgroup-nat-id}" 
-}
-resource "aws_security_group_rule" "allow-icmp" { //cho phép ping đến
-    security_group_id = module.webserver-cluster.sgroup_asg_id
-    type = "ingress"
+#     from_port = 22
+#     to_port = 22
+#     protocol = "tcp"
+#     source_security_group_id = "${module.webserver-cluster.sgroup-nat-id}" 
+# }
+# resource "aws_security_group_rule" "allow-icmp" { //cho phép ping đến
+#     security_group_id = module.webserver-cluster.sg-asg-id
+#     type = "ingress"
 
-    from_port = -1
-    to_port = -1
-    protocol = "icmp"
-    source_security_group_id = "${module.vpc.vpc_cidr}" 
-}
-resource "aws_security_group_rule" "allow-nat" {
-    security_group_id = module.webserver-cluster.sgroup_asg_id
+#     from_port = -1
+#     to_port = -1
+#     protocol = "icmp"
+#     source_security_group_id = "${module.vpc.vpc_cidr}" 
+# }
+# resource "aws_security_group_rule" "allow-nat" {
+#     security_group_id = module.webserver-cluster.sg-asg-id
 
-    type = "egress"
-    from_port = 0
-    to_port = 65535
-    protocol = "-1"
-    source_security_group_id = module.vpc.nat-gateway
-}
+#     type = "egress"
+#     from_port = 0
+#     to_port = 65535
+#     protocol = "-1"
+#     source_security_group_id = module.vpc.nat-gateway
+# }

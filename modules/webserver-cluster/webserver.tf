@@ -14,7 +14,10 @@ resource "aws_security_group" "sgroup-alb" {
     name = "sgroup-alb"
     vpc_id = var.vpc-id
 }
-
+resource "aws_iam_instance_profile" "role_profile" {
+  name = "role_profile"
+  role = "codedeploy-test"
+}
 resource "aws_security_group_rule" "sg-rule-alb" {
     security_group_id = aws_security_group.sgroup-alb.id
     
@@ -70,10 +73,11 @@ resource "aws_security_group_rule" "sg-rule-asg-ingress" {
 
 resource "aws_launch_configuration" "webserver-cluster" {
     name = "terraform-webserver-cluster"
-
+    
     image_id = var.ami-instance
     instance_type = var.type-instance
     key_name = var.key-name
+    iam_instance_profile = "${aws_iam_instance_profile.role_profile.name}"
     security_groups = [ "${aws_security_group.sgroup-asc.id}" ]
 
     associate_public_ip_address = var.associate-public-ip
