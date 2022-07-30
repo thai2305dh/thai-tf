@@ -13,7 +13,7 @@ variable "public-all" {}
 variable "private-all" {}
 
 # bastion
-variable "key_name" {}
+# variable "key_name" {}
 variable "bastion-ami" {}
 variable "ingress-bastion" {}
 variable "egress-bastion" {}
@@ -28,6 +28,7 @@ variable "ami-webserver" {}
 variable "min" {}
 variable "max" {}
 
+variable "key-bastion" {}
 variable "port-alb-access" {}
 variable "protocol-alb-access" {}
 variable "path-alb-healthcheck" {}
@@ -44,3 +45,34 @@ variable "key_pair_name" {
     type = string
     default = "my-key"
 }
+
+
+# db-engine = "mysql"
+# db-engine-version = "8.0"
+# db-instance-type = "db.t2.micro"
+# db-name = "******"
+# username = "*****"
+# password = "****"
+# port = 3306
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

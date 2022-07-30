@@ -6,13 +6,19 @@ resource "aws_subnet" "public-subnets" {
     availability_zone = each.key
     cidr_block = cidrsubnet(var.cidr-vpc, 4, each.value) 
     map_public_ip_on_launch = true
+    tags = {
+        Name = "public-subnet-${each.key}"
+    }
 }
 
 resource "aws_subnet" "private-subnets" {
     for_each = var.private-subnet-stt
     vpc_id = aws_vpc.vpc.id
     availability_zone = each.key
-    cidr_block = cidrsubnet(var.cidr-vpc, 4, each.value) 
+    cidr_block = cidrsubnet(var.cidr-vpc, 4, each.value)
+    tags = {
+        Name = "private-subnet-${each.key}"
+    }
     # map_public_ip_on_launch = true
 }
 
@@ -21,7 +27,7 @@ resource "aws_internet_gateway" "gw-thai" {
     vpc_id = aws_vpc.vpc.id //attach to vpc
     
     tags = {
-        Name = "gw-thai"
+        Name = "terraform-internet-gw"
     }
 }
 

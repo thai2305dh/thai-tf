@@ -7,7 +7,7 @@ variable "ami-instance" {
 variable "type-instance" {
     type = string
 }
-variable "key-name" {
+variable "key-bastion" {
     type = string
 }
 variable "associate-public-ip" {
@@ -62,5 +62,11 @@ variable "public-subnets" {
     type = list(string)
 }
 variable "asg-subnets" {
+    type = string
+}
+variable "bastion-ssh" {
+    type = string
+}
+variable "ssh-instance" {
     type = string
 }

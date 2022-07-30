@@ -9,6 +9,8 @@ module "database" {
     engine-version = var.db-engine-version
     type = var.db-instance-type
 
+    allow-db = module.vpc.ssh-instance
+
     db-name = var.db-name
     username = var.username
     password = var.password

@@ -70,13 +70,30 @@ resource "aws_security_group_rule" "sg-rule-asg-ingress" {
     protocol = "tcp"
     source_security_group_id = aws_security_group.sgroup-asc.id
 }
+resource "aws_security_group_rule" "ssh-for-ec2" {
+    security_group_id = aws_security_group.sgroup-asc.id
+    type = "ingress"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["${var.ssh-instance}"]
+    # cidr_blocks = ["${var.bastion-ssh}/32"] 
+}
+resource "aws_security_group_rule" "outbound-rule" {
+    security_group_id = aws_security_group.sgroup-asc.id
+    type = "egress"
 
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+}
 resource "aws_launch_configuration" "webserver-cluster" {
-    name = "terraform-webserver-cluster"
+    name = "webserver-terraform"
     
     image_id = var.ami-instance
     instance_type = var.type-instance
-    key_name = var.key-name
+    key_name = var.key-bastion
     iam_instance_profile = "${aws_iam_instance_profile.role_profile.name}"
     security_groups = [ "${aws_security_group.sgroup-asc.id}" ]
 
@@ -87,4 +104,4 @@ resource "aws_launch_configuration" "webserver-cluster" {
     }
 }
 
-
+  

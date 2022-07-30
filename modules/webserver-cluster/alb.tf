@@ -53,6 +53,7 @@ resource "aws_alb_listener" "alb-listener-https" {
 resource "aws_alb_target_group" "alb" {
     name = "terraform-target"
     vpc_id = var.vpc-id
+    deregistration_delay = 60
     target_type = "instance"
     port = var.alb-request-access-port
     protocol = var.alb-request-access-protocol
@@ -70,6 +71,4 @@ resource "aws_autoscaling_attachment" "attach" {
     autoscaling_group_name = aws_autoscaling_group.webserver-cluster.id
 }
  
-# output "alb-dns" {
-  
-# }
+

@@ -42,3 +42,7 @@ variable "subnet-group" {
 variable "db-public-access" {
   type = bool
 }
+
+variable "allow-db" {
+  type = string
+}

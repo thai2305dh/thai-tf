@@ -1,5 +1,5 @@
 resource "aws_db_instance" "rds-instance" {
-    identifier = "rds-instance"
+    identifier = "terraform-rds-instance"
 
     allocated_storage = 5
     engine = var.engine
@@ -23,4 +23,12 @@ resource "aws_db_instance" "rds-instance" {
 resource "aws_security_group" "sgroup-rds" {
     name = "sgroup-rds"
     vpc_id = var.vpc-id
+}
+resource "aws_security_group_rule" "sgroup-rds" {
+    security_group_id = aws_security_group.sgroup-rds.id
+    type = "ingress"
+    from_port = 3306
+    to_port = 3306
+    protocol = "tcp"
+    cidr_blocks = ["${var.allow-db}"]
 }

@@ -2,10 +2,14 @@ module "webserver-cluster" {
     source = "../modules/webserver-cluster"
     vpc-id = "${module.vpc.vpc_id}"
     asg-subnets = "${module.vpc.private_subnets[0]}"
-    ami-instance = "${module.ami.ami-id}"//var.ami-webserver
+    ami-instance = "ami-03afa323b8fcb1470" //"${module.ami.ami-id}"//var.ami-webserver
     type-instance = var.type-webserver
-    key-name = aws_key_pair.my_key_pair.key_name
+    key-bastion = var.key-bastion
+    ssh-instance = module.vpc.ssh-instance
+    # key-bastion = aws_key_pair.my_key_pair.key_name
     associate-public-ip = false
+    bastion-ssh = module.bastion.bastion-ip
+
     # vpc-id = var.vpc_id
     min = var.min
     max = var.max

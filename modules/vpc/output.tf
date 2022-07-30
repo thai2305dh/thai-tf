@@ -27,3 +27,6 @@ output "vpc_cidr" {
 output "nat-gateway" {
     value = aws_nat_gateway.nat-1a.id
 }
+output "ssh-instance" {
+    value = aws_vpc.vpc.cidr_block
+}
