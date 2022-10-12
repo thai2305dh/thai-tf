@@ -20,7 +20,7 @@ resource "aws_subnet" "public-subnet-1a" {
     tags = {
         Name = "Public Subnet 1a"
     }
-    availability_zone = "us-east-2a"
+    availability_zone = "us-east-1a"
     map_public_ip_on_launch = true //Chỉ định true để chỉ ra rằng instances được đưa vào subnet phải được gán một địa chỉ IP công cộng
 }
 resource "aws_subnet" "public-subnet-1b" {
@@ -29,7 +29,7 @@ resource "aws_subnet" "public-subnet-1b" {
     tags = {
         Name = "Public Subnet 1b"
     }
-    availability_zone = "us-east-2b"
+    availability_zone = "us-east-1b"
     map_public_ip_on_launch = true
 }
 # resource "aws_subnet" "public-subnet-1c" {
@@ -48,7 +48,7 @@ resource "aws_subnet" "private-subnet-1a" {
     tags = {
         Name = "Private Subnet 1a"
     }
-    availability_zone = "us-east-2a"
+    availability_zone = "us-east-1a"
     map_public_ip_on_launch = true
 }
 resource "aws_subnet" "private-subnet-1b" {
@@ -58,7 +58,7 @@ resource "aws_subnet" "private-subnet-1b" {
     tags = {
         Name = "Private Subnet 1b"
     }
-    availability_zone = "us-east-2b"
+    availability_zone = "us-east-1b"
     map_public_ip_on_launch = true
 }
 #tạo internet gateway- Khi tạo 1 vpc thì nó là private network, muốn truy cập được từ internet cần thông qua Internet gateway
