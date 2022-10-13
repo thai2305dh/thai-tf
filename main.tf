@@ -7,7 +7,7 @@ module "networking" {
   
   name = var.name
   vpc_cidr_block = var.vpc_cidr_block
-  map_az_subnet = var.map_az_subnet
+#  map_az_subnet = var.map_az_subnet
 }
 
 module "sg" {
