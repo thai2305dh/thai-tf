@@ -20,7 +20,7 @@ resource "aws_subnet" "public_subnet" {
   cidr_block = each.value
   map_public_ip_on_launch = true
   tags = {
-    "Name" = "${var.name}-${cidrsubnet(var.vpc_cidr_block, 4, each.value)}"
+    "Name" = "${var.name}-${each.value}"
   }
 }
 
