@@ -20,11 +20,12 @@ pipeline {
                     currentBuild.displayName = params.version
                 }
                 sh "ls"
-                sh 'main/terraform init -input=false'
-                sh 'main/terraform workspace select ${environment}'
+                sh "cd main/"
+                sh 'terraform init -input=false'
+                sh 'terraform workspace select ${environment}'
                 // sh "terraform plan -input=false -out tfplan -var 'version=${params.version}' --var-file=environments/${params.environment}.tfvars"
-                sh "main/terraform plan -input=false -out tfplan --var-file=environments/${params.environment}.tfvars"   
-                sh 'main/terraform show -no-color tfplan > tfplan.txt'
+                sh "terraform plan -input=false -out tfplan --var-file=environments/${params.environment}.tfvars"   
+                sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
 
