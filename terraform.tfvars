@@ -7,7 +7,6 @@ map_az_subnet = {
 }
 
 ######### ELB #############
-name = "huyls"
 instance_type = "t3.medium"
 key_pair = "huyls"
 #image_id = "ami-0b2c91ed65ccbb775"
