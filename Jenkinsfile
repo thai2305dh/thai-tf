@@ -19,7 +19,7 @@ pipeline {
                 script {
                     currentBuild.displayName = params.version
                 }
-                sh "cd main/"
+                sh "cd main"
 		sh "ls"
                 sh 'terraform init -input=false'
                 sh 'terraform workspace select ${environment}'
