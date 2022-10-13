@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "networking" {
-  source = "../modules/networking"
+  source = "./modules/networking"
   
   name = var.name
   vpc_cidr_block = var.vpc_cidr_block
@@ -11,13 +11,13 @@ module "networking" {
 }
 
 module "sg" {
-  source = "../modules/sg"
+  source = "./modules/sg"
 
   vpc = module.networking.vpc
 }
 
 module "elb" {
-  source = "../modules/elb"
+  source = "./modules/elb"
 
   name = var.name
   instance_type = var.instance_type
@@ -30,7 +30,7 @@ module "elb" {
 }
 
 module "efs" {
-  source = "../modules/efs"
+  source = "./modules/efs"
 
   name = var.name
   vpc = module.networking.vpc
