@@ -24,7 +24,7 @@ pipeline {
                 sh 'terraform workspace select ${environment}'
                 // sh "terraform plan -input=false -out tfplan -var 'version=${params.version}' --var-file=environments/${params.environment}.tfvars"
 //                 sh "terraform plan -input=false -out tfplan --var-file=environments/${params.environment}.tfvars"   
-		sh "terraform destroy --var-file=environments/${params.environment}.tfvars"   
+		sh "terraform destroy --auto-approve --var-file=environments/${params.environment}.tfvars"   
 //                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
