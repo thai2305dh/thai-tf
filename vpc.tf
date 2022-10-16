@@ -9,7 +9,6 @@ resource "aws_vpc" "vpc-thai" {
     Name = "vpc-thai"
   }
 }
-# tạo public và private subnet - Vùng chứa đối tượng cần truy cập( Ở đây là dải IP )
 // public : các service cần đi ra ngoài internet
 resource "aws_subnet" "public-subnet-1a" {
     vpc_id = aws_vpc.vpc-thai.id
