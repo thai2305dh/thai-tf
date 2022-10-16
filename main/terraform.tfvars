@@ -6,7 +6,7 @@ map_az_subnet = {
     "ap-east-1c" = 3
 }
 
-######### ELB #############
+######### Elastic Load Balance #############
 name = "huyls"
 instance_type = "t3.medium"
 key_pair = "huyls"
