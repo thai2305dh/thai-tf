@@ -73,6 +73,7 @@ resource "aws_security_group" "tf-sg" {
 # # }
 # resource "aws_key_pair" "key" {
 #   key_name = "key"
+# #I will change public_key here
 #   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQKz8f3XrQCdrjMSuYCCEpfyggnYXCt4ua3ZJszUw7v52b9hcbtJMmxdMtiIebDulNSJCKIoYw50yiIcRMAY2vj8kHtPG8rRlaImTJf2jo726A4N+0StD0sLZAuWgZ7A2ezbVgh0OccWESYmPid+IWR/v75u04rfPOlR4WzsYTtPPxMuJ2+5gxzXZ1F49qMGuxc2XKuxl9fiK+CXGQ1NtFMK7WTTtrdgSMQ1AnfAM57IXWmMHzELU0RNZpTwnj7qKzW1erpmxXwwU8IqjWUSSvPUl0vTw5tsm47hVKD9FuwUCsaPYgPcaYbUilxfRstAqXNvVoHRse4iZfQXB2/G1X yeu@kali"
 # }
 
