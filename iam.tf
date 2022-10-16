@@ -11,7 +11,7 @@ resource "aws_iam_group" "tf-group" {
     name = "tf-group"
 }
 
-# Sau khi tạo user và group thì cần phân users vào group
+# Sau khi tạo user
 resource "aws_iam_group_membership" "assigment" {
     name =  "assigment"
     users = [
