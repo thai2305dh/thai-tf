@@ -36,7 +36,7 @@ resource "aws_subnet" "public-subnet-1b" {
 #     }
 #     availability_zone = "us-east-2a"
 # }
-// private : các service k cần đi ra ngoài internet
+// private 
 resource "aws_subnet" "private-subnet-1a" {
     vpc_id = aws_vpc.vpc-thai.id
 
@@ -57,7 +57,7 @@ resource "aws_subnet" "private-subnet-1b" {
     availability_zone = "us-east-2b"
     map_public_ip_on_launch = true
 }
-#tạo internet gateway- Khi tạo 1 vpc thì nó là private network, muốn truy cập được từ internet cần thông qua Internet gateway
+#tạo internet gateway
 resource "aws_internet_gateway" "gw-thai" {
     vpc_id = aws_vpc.vpc-thai.id //attach to vpc
     tags = {
