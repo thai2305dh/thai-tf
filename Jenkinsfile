@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'environment', defaultValue: 'default', description: 'Workspace/environment file to use for deployment')
-	string(name: 'environment', defaultValue: 'dev', description: 'Workspace/environment dev env file to use for deployment')
+	    string(name: 'environment', defaultValue: "${default}", description: 'Workspace/environment file to use for deployment')
         string(name: 'version', defaultValue: '', description: 'Version variable to pass to Terraform')
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
@@ -58,4 +57,18 @@ pipeline {
             archiveArtifacts artifacts: 'tfplan.txt'
         }
     }
+}
+def default = checkBox("opt",
+                "opt1,opt2,opt3",
+                "opt1", 
+                0,
+                "Multi-select",
+                )
+
+properties(
+  [parameters([default])]
+)
+
+node {
+    echo "${params.opt}"
 }
