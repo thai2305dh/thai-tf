@@ -9,7 +9,7 @@ resource "aws_vpc" "vpc-thai" {
     Name = "vpc-thai"
   }
 }
-// public : các service cần đi ra ngoài internet
+// public 
 resource "aws_subnet" "public-subnet-1a" {
     vpc_id = aws_vpc.vpc-thai.id
     cidr_block       = "10.0.0.0/24"
